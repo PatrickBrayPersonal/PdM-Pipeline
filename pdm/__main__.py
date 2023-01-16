@@ -6,17 +6,20 @@ This is where you import the pipeline function from its module and resolve it.
 # Sematic
 from pdm.pipeline import pipeline
 from sematic import SilentResolver
+import fire
 
 
-def main():
+def main(config: str, silent: bool = False):
     """
     Entry point of my pipeline.
     """
-    pipeline().set(name="PdM Development", tags=["DEBUG"]).resolve(SilentResolver())
+    assert isinstance(silent, bool), "silent entry must be 'True' or 'False'"
+    if silent:
+        resolver = SilentResolver()
+    else:
+        resolver = None
+    pipeline().set(name="PdM Development", tags=["DEBUG"]).resolve(resolver)
 
 
 if __name__ == "__main__":
-    main()
-    print("Done!")
-
-# TODO: Build your CLI here, google CLI packages
+    fire.Fire(main)

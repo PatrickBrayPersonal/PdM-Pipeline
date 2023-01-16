@@ -5,10 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "main",
+            "name": "silent",
             "type": "python",
             "request": "launch",
             "module": "pdm",
+            "args": ["--config", "abc", "--silent", "True"],
             "subProcess": true,
             "justMyCode": true
         },
