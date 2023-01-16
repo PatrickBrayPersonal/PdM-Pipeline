@@ -5,7 +5,6 @@ Feel free to break these definitions into as many files as you want for your
 preferred code structure.
 """
 # Sematic
-from dataclasses import dataclass
 import dataclasses
 import sematic
 import pandas as pd
@@ -15,28 +14,7 @@ from sklearn.linear_model import LinearRegression
 import sklearn.metrics as skmetrics
 import yaml
 
-
-@dataclass
-class EvaluationResults:
-    r2_score: float
-    mean_absolute_error: float
-    mean_squared_error: float
-    mean_absolute_percentage_error: float
-    median_absolute_error: float
-    max_error: float
-    explained_variance_score: float
-
-
-@dataclass
-class TrainConfig:
-    label: str = "RUL"
-    paradigm: str = "regression"
-
-
-@dataclass
-class PipelineOutput:
-    evaluation_results: EvaluationResults
-    config: TrainConfig
+from pdm.classes import EvaluationResults, TrainConfig, PipelineOutput
 
 
 @sematic.func(inline=True)
