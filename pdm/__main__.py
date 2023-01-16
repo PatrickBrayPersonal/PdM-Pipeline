@@ -12,12 +12,11 @@ def main():
     """
     Entry point of my pipeline.
     """
-    pipeline().set(name="PdM Development", tags=["DEBUG"]).resolve()
+    pipeline().set(name="PdM Development", tags=["DEBUG"]).resolve(SilentResolver())
 
 
 if __name__ == "__main__":
     main()
     print("Done!")
-    print("check the UI")
 
 # TODO: Build your CLI here, google CLI packages
