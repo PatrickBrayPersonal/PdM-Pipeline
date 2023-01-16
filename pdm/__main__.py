@@ -3,10 +3,10 @@ This is the entry point of your pipeline.
 
 This is where you import the pipeline function from its module and resolve it.
 """
-# Sematic
-from pdm.pipeline import pipeline
-from sematic import SilentResolver
 import fire
+from sematic import SilentResolver
+
+from pdm.pipeline import pipeline
 
 
 def main(config: str, silent: bool = False):

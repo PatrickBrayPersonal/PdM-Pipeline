@@ -6,15 +6,16 @@ preferred code structure.
 """
 # Sematic
 import dataclasses
-import sematic
-import pandas as pd
 from pathlib import Path
-from sklearn.base import BaseEstimator
-from sklearn.linear_model import LinearRegression
+
+import pandas as pd
+import sematic
 import sklearn.metrics as skmetrics
 import yaml
+from sklearn.base import BaseEstimator
+from sklearn.linear_model import LinearRegression
 
-from pdm.classes import EvaluationResults, TrainConfig, PipelineOutput
+from pdm.classes import EvaluationResults, PipelineOutput, TrainConfig
 
 
 @sematic.func(inline=True)
