@@ -17,5 +17,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+    print("Done!")
 
 # TODO: Build your CLI here, google CLI packages
