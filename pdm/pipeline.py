@@ -5,17 +5,17 @@ Feel free to break these definitions into as many files as you want for your
 preferred code structure.
 """
 # Sematic
-import dataclasses
 from pathlib import Path
 
 import pandas as pd
 import sematic
-import sklearn.metrics as skmetrics
 import yaml
 from sklearn.base import BaseEstimator
 from sklearn.linear_model import LinearRegression
 
+from pdm import evaluate as pdm_evals
 from pdm.classes import EvaluationResults, PipelineOutput, TrainConfig
+from pdm.utils import split_xy
 
 
 @sematic.func(inline=True)
@@ -38,34 +38,15 @@ def train_model(
     return model
 
 
-def split_xy(config: TrainConfig, df: pd.DataFrame) -> tuple:
-    LABELS = ["id", "RUL", "label1", "label2"]
-    X = df.drop(labels=LABELS, axis=1)
-    y = df[config.label]
-    return X, y
-
-
-@sematic.func(inline=False)
-def evaluate_model(
-    config: TrainConfig,
-    model: BaseEstimator,
-    test_df: pd.DataFrame,
-) -> EvaluationResults:
-    X, y = split_xy(config, test_df)
-    y_hat = model.predict(X)
-    results = {}
-    for metric in dataclasses.fields(EvaluationResults):
-        results[metric.name] = getattr(skmetrics, metric.name)(y, y_hat)
-    return EvaluationResults(**results)
-
-
 @sematic.func(inline=True)
 def train_eval(
     train_df: pd.DataFrame, test_df: pd.DataFrame, config: TrainConfig
 ) -> EvaluationResults:
     model = train_model(config=config, train_df=train_df)
 
-    evaluation_results = evaluate_model(config=config, model=model, test_df=test_df)
+    evaluation_results = pdm_evals.evaluate_model(
+        config=config, model=model, test_df=test_df
+    )
     return evaluation_results
 
 
