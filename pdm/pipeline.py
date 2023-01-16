@@ -35,8 +35,6 @@ class TrainConfig:
 
 @dataclass
 class PipelineOutput:
-    len_train_df: int
-    len_test_df: int
     evaluation_results: EvaluationResults
     config: TrainConfig
 
@@ -110,8 +108,6 @@ def pipeline(config: str) -> PipelineOutput:
 
     evaluation_results = train_eval(train_df, test_df, config)
     return make_output(
-        train_df=train_df,
-        test_df=test_df,
         evaluation_results=evaluation_results,
         config=config,
     )
@@ -119,14 +115,10 @@ def pipeline(config: str) -> PipelineOutput:
 
 @sematic.func(inline=True)
 def make_output(
-    train_df: pd.DataFrame,
-    test_df: pd.DataFrame,
     evaluation_results: EvaluationResults,
     config: TrainConfig,
 ) -> PipelineOutput:
     return PipelineOutput(
-        len_train_df=len(train_df),
-        len_test_df=len(test_df),
         evaluation_results=evaluation_results,
         config=config,
     )
