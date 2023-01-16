@@ -18,7 +18,7 @@ def main(config: str, silent: bool = False):
         resolver = SilentResolver()
     else:
         resolver = None
-    pipeline().set(name="PdM Development", tags=["DEBUG"]).resolve(resolver)
+    pipeline(config).set(name="PdM Development", tags=["DEBUG"]).resolve(resolver)
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "module": "pdm",
-            "args": ["--config", "abc", "--silent", "True"],
+            "args": ["--config", "rul_regression", "--silent", "True"],
             "subProcess": true,
             "justMyCode": true
         },

@@ -13,6 +13,7 @@ from pathlib import Path
 from sklearn.base import BaseEstimator
 from sklearn.linear_model import LinearRegression
 import sklearn.metrics as skmetrics
+import yaml
 
 
 @dataclass
@@ -28,7 +29,6 @@ class EvaluationResults:
 
 @dataclass
 class TrainConfig:
-    author: str = "Patrick Bray"
     label: str = "RUL"
     paradigm: str = "regression"
 
@@ -38,8 +38,7 @@ class PipelineOutput:
     len_train_df: int
     len_test_df: int
     evaluation_results: EvaluationResults
-    train_config: TrainConfig
-    author: str = "Patrick Bray"
+    config: TrainConfig
 
 
 @sematic.func(inline=True)
@@ -85,33 +84,36 @@ def evaluate_model(
 
 @sematic.func(inline=True)
 def train_eval(
-    train_df: pd.DataFrame, test_df: pd.DataFrame, train_config: TrainConfig
+    train_df: pd.DataFrame, test_df: pd.DataFrame, config: TrainConfig
 ) -> EvaluationResults:
-    model = train_model(config=train_config, train_df=train_df)
+    model = train_model(config=config, train_df=train_df)
 
-    evaluation_results = evaluate_model(
-        config=train_config, model=model, test_df=test_df
-    )
+    evaluation_results = evaluate_model(config=config, model=model, test_df=test_df)
     return evaluation_results
 
 
+def read_config(config_name: str) -> TrainConfig:
+    config = yaml.full_load(open(f"pdm/config/{config_name}.yaml"))
+    return TrainConfig(**config)
+
+
 @sematic.func(inline=True)
-def pipeline() -> PipelineOutput:
+def pipeline(config: str) -> PipelineOutput:
     """
     The root function of the pipeline.
     """
+    config = read_config(config)
+
     train_df = load_pdm_dataset(train=True)
 
     test_df = load_pdm_dataset(train=False)
 
-    train_config = TrainConfig()
-
-    evaluation_results = train_eval(train_df, test_df, train_config)
+    evaluation_results = train_eval(train_df, test_df, config)
     return make_output(
         train_df=train_df,
         test_df=test_df,
         evaluation_results=evaluation_results,
-        train_config=train_config,
+        config=config,
     )
 
 
@@ -120,11 +122,11 @@ def make_output(
     train_df: pd.DataFrame,
     test_df: pd.DataFrame,
     evaluation_results: EvaluationResults,
-    train_config: TrainConfig,
+    config: TrainConfig,
 ) -> PipelineOutput:
     return PipelineOutput(
         len_train_df=len(train_df),
         len_test_df=len(test_df),
         evaluation_results=evaluation_results,
-        train_config=train_config,
+        config=config,
     )
