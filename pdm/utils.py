@@ -5,7 +5,7 @@ from pdm.classes import TrainConfig
 
 
 def split_xy(config: TrainConfig, df: pd.DataFrame) -> tuple:
-    X = df.drop(labels=config.all_labels.split(", "), axis=1)
+    X = df.drop(labels=config.all_labels, axis=1)
     y = df[config.label]
     return X, y
 

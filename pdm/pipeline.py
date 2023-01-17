@@ -11,7 +11,7 @@ import pandas as pd
 import sematic
 from sklearn.base import BaseEstimator
 
-from pdm import evaluate, models
+from pdm import evaluate, features, models
 from pdm.classes import Metrics, PipelineOutput, TrainConfig
 from pdm.utils import read_config, split_xy
 
@@ -37,6 +37,13 @@ def train_model(
 
 
 @sematic.func(inline=True)
+def make_features(config: TrainConfig, df: pd.DataFrame) -> pd.DataFrame:
+    # for feature in config.feature_functions:
+    #     getattr(features, feature)(df)
+    return df
+
+
+@sematic.func(inline=True)
 def pipeline(config: str) -> PipelineOutput:
     """
     The root function of the pipeline.
@@ -44,10 +51,12 @@ def pipeline(config: str) -> PipelineOutput:
     config = read_config(config)
 
     train_df = load_pdm_dataset(train=True)
+    # train_df = make_features(config, train_df)
 
     test_df = load_pdm_dataset(train=False)
+    # test_df = make_features(config, test_df)
 
-    model = train_model(config=config, train_df=train_df)
+    model = train_model(config, train_df)
 
     evaluation_results = getattr(evaluate, config.evaluate)(
         config=config, model=model, test_df=test_df

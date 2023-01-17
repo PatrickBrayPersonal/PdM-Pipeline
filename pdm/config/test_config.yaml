@@ -1,0 +1,12 @@
+label: "RUL"
+all_labels: "id, RUL, label1, label2"
+evaluate: "regression"
+model: "LinearRegression"
+test_dict:
+  a: 1
+  b: 2
+  c: 3
+test_list:
+  - a
+  - b
+  - c

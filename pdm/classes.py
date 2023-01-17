@@ -29,7 +29,7 @@ class RegressionMetrics(Metrics):
 @dataclass
 class TrainConfig:
     label: str
-    all_labels: str
+    all_labels: set
     evaluate: str
     model: str
 

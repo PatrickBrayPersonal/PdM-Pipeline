@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "test_config",
+            "type": "python",
+            "request": "launch",
+            "module": "pdm",
+            "args": ["--config", "test_config", "--silent", "True"],
+            "subProcess": true,
+            "justMyCode": true
+        },
+        {
             "name": "class",
             "type": "python",
             "request": "launch",

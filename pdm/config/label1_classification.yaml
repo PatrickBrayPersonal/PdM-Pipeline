@@ -1,3 +1,8 @@
-  label: "label1"
-  evaluate: "classification"
-  model: "LogisticRegression"
+label: "label1"
+all_labels:
+  - id
+  - RUL
+  - label1
+  - label2
+evaluate: "classification"
+model: "LogisticRegression"
