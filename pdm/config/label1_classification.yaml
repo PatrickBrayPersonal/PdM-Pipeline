@@ -1,9 +1,12 @@
 label: "label1"
-all_labels:
-  - id
-  - RUL
-  - label1
-  - label2
-
+cleaning_functions:
+  - name: drop_columns
+    args:
+      cols:
+        - id
+        - RUL
+        - label2
+model:
+  - name: StandardScaler
+  - name: LogisticRegression
 evaluate: "classification"
-model: "LogisticRegression"

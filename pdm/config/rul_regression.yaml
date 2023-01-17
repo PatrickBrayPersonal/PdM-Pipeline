@@ -6,7 +6,7 @@ cleaning_functions:
         - id
         - label1
         - label2
-feature_functions:
-  - name: standard_scaler
+model:
+  - name: StandardScaler
+  - name: LinearRegression
 evaluate: regression
-model: LinearRegression
