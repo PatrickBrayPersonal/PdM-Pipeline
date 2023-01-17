@@ -8,7 +8,6 @@ preferred code structure.
 from pathlib import Path
 
 import pandas as pd
-import sematic
 from sklearn.base import BaseEstimator
 
 from pdm import evaluate, features, models
@@ -16,7 +15,6 @@ from pdm.classes import Metrics, PipelineOutput, TrainConfig
 from pdm.utils import read_config, split_xy
 
 
-@sematic.func(inline=True)
 def load_pdm_dataset(train: bool, path: Path = Path("data/raw")) -> pd.DataFrame:
     if train:
         df = pd.read_csv(path / "PdM_train.csv")
@@ -25,7 +23,6 @@ def load_pdm_dataset(train: bool, path: Path = Path("data/raw")) -> pd.DataFrame
     return df
 
 
-@sematic.func(inline=False)
 def train_model(
     config: TrainConfig,
     train_df: pd.DataFrame,
@@ -36,14 +33,12 @@ def train_model(
     return model
 
 
-@sematic.func(inline=True)
 def make_features(config: TrainConfig, df: pd.DataFrame) -> pd.DataFrame:
     # for feature in config.feature_functions:
     #     getattr(features, feature)(df)
     return df
 
 
-@sematic.func(inline=True)
 def pipeline(config: str) -> PipelineOutput:
     """
     The root function of the pipeline.
@@ -67,7 +62,6 @@ def pipeline(config: str) -> PipelineOutput:
     )
 
 
-@sematic.func(inline=True)
 def make_output(
     evaluation_results: Metrics,
     config: TrainConfig,

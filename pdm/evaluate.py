@@ -1,7 +1,6 @@
 import dataclasses
 
 import pandas as pd
-import sematic
 import sklearn.metrics as skmetrics
 from sklearn.base import BaseEstimator
 
@@ -9,7 +8,6 @@ from pdm.classes import ClassificationMetrics, RegressionMetrics, TrainConfig
 from pdm.utils import split_xy
 
 
-@sematic.func(inline=True)
 def regression(
     config: TrainConfig,
     model: BaseEstimator,
@@ -23,7 +21,6 @@ def regression(
     return RegressionMetrics(**results)
 
 
-@sematic.func(inline=True)
 def classification(
     config: TrainConfig,
     model: BaseEstimator,
