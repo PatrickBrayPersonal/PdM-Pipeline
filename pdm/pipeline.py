@@ -11,9 +11,10 @@ import pandas as pd
 import sematic
 import yaml
 from sklearn.base import BaseEstimator
-from sklearn.linear_model import LinearRegression
 
+import pdm
 from pdm import evaluate as pdm_evals
+from pdm import models
 from pdm.classes import EvaluationResults, PipelineOutput, TrainConfig
 from pdm.utils import split_xy
 
@@ -32,7 +33,7 @@ def train_model(
     config: TrainConfig,
     train_df: pd.DataFrame,
 ) -> BaseEstimator:
-    model = LinearRegression()
+    model = getattr(models, config.model)()()
     X, y = split_xy(config, train_df)
     model.fit(X=X, y=y)
     return model
@@ -44,7 +45,7 @@ def train_eval(
 ) -> EvaluationResults:
     model = train_model(config=config, train_df=train_df)
 
-    evaluation_results = getattr(pdm_evals, config.evaluate)(
+    evaluation_results = getattr(pdm.evaluate, config.evaluate)(
         config=config, model=model, test_df=test_df
     )
     return evaluation_results

@@ -14,8 +14,9 @@ class EvaluationResults:
 
 @dataclass
 class TrainConfig:
-    label: str = "RUL"
-    evaluate: str = "regression"
+    label: str
+    evaluate: str
+    model: str
 
 
 @dataclass
