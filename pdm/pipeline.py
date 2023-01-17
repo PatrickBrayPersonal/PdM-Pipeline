@@ -11,7 +11,7 @@ import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.pipeline import Pipeline
 
-from pdm import cleaning, evaluate, features, models
+from pdm import cleaning, evaluate, models
 from pdm.classes import Metrics, PipelineOutput, TrainConfig
 from pdm.utils import read_config, split_xy
 
