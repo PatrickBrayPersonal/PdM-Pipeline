@@ -1,8 +1,12 @@
 label: "RUL"
-all_labels:
-  - id
-  - RUL
-  - label1
-  - label2
-evaluate: "regression"
-model: "LinearRegression"
+cleaning_functions:
+  - name: drop_columns
+    args:
+      cols:
+        - id
+        - label1
+        - label2
+feature_functions:
+  - name: standard_scaler
+evaluate: regression
+model: LinearRegression

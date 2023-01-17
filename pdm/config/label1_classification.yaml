@@ -4,5 +4,6 @@ all_labels:
   - RUL
   - label1
   - label2
+
 evaluate: "classification"
 model: "LogisticRegression"

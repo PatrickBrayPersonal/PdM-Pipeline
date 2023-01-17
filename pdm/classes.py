@@ -29,7 +29,8 @@ class RegressionMetrics(Metrics):
 @dataclass
 class TrainConfig:
     label: str
-    all_labels: set
+    cleaning_functions: set
+    feature_functions: dict
     evaluate: str
     model: str
 
