@@ -1,13 +1,15 @@
+from typing import Tuple
+
 import pandas as pd
 import yaml
 
 from pdm.classes import TrainConfig
 
 
-def split_xy(config: TrainConfig, df: pd.DataFrame) -> tuple:
+def split_xy(config: TrainConfig, df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.Series]:
     X = df.drop(labels=config.all_labels, axis=1)
     y = df[config.label]
-    return X, y
+    return tuple(X, y)
 
 
 def read_config(config_name: str) -> TrainConfig:
