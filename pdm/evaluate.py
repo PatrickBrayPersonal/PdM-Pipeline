@@ -10,7 +10,7 @@ from pdm.utils import split_xy
 
 
 @sematic.func(inline=False)
-def evaluate_model(
+def regression(
     config: TrainConfig,
     model: BaseEstimator,
     test_df: pd.DataFrame,

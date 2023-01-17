@@ -15,7 +15,7 @@ class EvaluationResults:
 @dataclass
 class TrainConfig:
     label: str = "RUL"
-    paradigm: str = "regression"
+    evaluate: str = "regression"
 
 
 @dataclass

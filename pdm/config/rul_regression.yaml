@@ -1,2 +1,2 @@
   label: "RUL"
-  paradigm: "regression"
+  evaluate: "regression"

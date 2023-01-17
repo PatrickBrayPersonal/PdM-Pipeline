@@ -44,7 +44,7 @@ def train_eval(
 ) -> EvaluationResults:
     model = train_model(config=config, train_df=train_df)
 
-    evaluation_results = pdm_evals.evaluate_model(
+    evaluation_results = getattr(pdm_evals, config.evaluate)(
         config=config, model=model, test_df=test_df
     )
     return evaluation_results
