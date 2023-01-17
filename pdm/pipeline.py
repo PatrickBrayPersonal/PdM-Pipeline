@@ -33,7 +33,7 @@ def train_model(
     config: TrainConfig,
     train_df: pd.DataFrame,
 ) -> BaseEstimator:
-    model = getattr(models, config.model)()()
+    model = getattr(models, config.model)()
     X, y = split_xy(config, train_df)
     model.fit(X=X, y=y)
     return model
