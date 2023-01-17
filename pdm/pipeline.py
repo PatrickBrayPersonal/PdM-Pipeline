@@ -12,7 +12,7 @@ from sklearn.base import BaseEstimator
 from sklearn.pipeline import Pipeline
 
 from pdm import cleaning, evaluate, models
-from pdm.classes import Metrics, PipelineOutput, TrainConfig
+from pdm.classes import PipelineOutput, TrainConfig
 from pdm.utils import read_config, split_xy
 
 
@@ -73,16 +73,6 @@ def pipeline(config: str) -> PipelineOutput:
     evaluation_results = getattr(evaluate, config.evaluate)(
         config=config, model=model, test_df=test_df
     )
-    return make_output(
-        evaluation_results=evaluation_results,
-        config=config,
-    )
-
-
-def make_output(
-    evaluation_results: Metrics,
-    config: TrainConfig,
-) -> PipelineOutput:
     return PipelineOutput(
         evaluation_results=evaluation_results,
         config=config,
