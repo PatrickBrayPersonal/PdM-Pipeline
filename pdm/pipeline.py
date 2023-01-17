@@ -9,14 +9,11 @@ from pathlib import Path
 
 import pandas as pd
 import sematic
-import yaml
 from sklearn.base import BaseEstimator
 
-import pdm
-from pdm import evaluate as pdm_evals
-from pdm import models
-from pdm.classes import EvaluationResults, PipelineOutput, TrainConfig
-from pdm.utils import split_xy
+from pdm import evaluate, models
+from pdm.classes import Metrics, PipelineOutput, TrainConfig
+from pdm.utils import read_config, split_xy
 
 
 @sematic.func(inline=True)
@@ -40,23 +37,6 @@ def train_model(
 
 
 @sematic.func(inline=True)
-def train_eval(
-    train_df: pd.DataFrame, test_df: pd.DataFrame, config: TrainConfig
-) -> EvaluationResults:
-    model = train_model(config=config, train_df=train_df)
-
-    evaluation_results = getattr(pdm.evaluate, config.evaluate)(
-        config=config, model=model, test_df=test_df
-    )
-    return evaluation_results
-
-
-def read_config(config_name: str) -> TrainConfig:
-    config = yaml.full_load(open(f"pdm/config/{config_name}.yaml"))
-    return TrainConfig(**config)
-
-
-@sematic.func(inline=True)
 def pipeline(config: str) -> PipelineOutput:
     """
     The root function of the pipeline.
@@ -67,7 +47,11 @@ def pipeline(config: str) -> PipelineOutput:
 
     test_df = load_pdm_dataset(train=False)
 
-    evaluation_results = train_eval(train_df, test_df, config)
+    model = train_model(config=config, train_df=train_df)
+
+    evaluation_results = getattr(evaluate, config.evaluate)(
+        config=config, model=model, test_df=test_df
+    )
     return make_output(
         evaluation_results=evaluation_results,
         config=config,
@@ -76,7 +60,7 @@ def pipeline(config: str) -> PipelineOutput:
 
 @sematic.func(inline=True)
 def make_output(
-    evaluation_results: EvaluationResults,
+    evaluation_results: Metrics,
     config: TrainConfig,
 ) -> PipelineOutput:
     return PipelineOutput(

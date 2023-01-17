@@ -1,0 +1,3 @@
+  label: "label1"
+  evaluate: "classification"
+  model: "LogisticRegression"

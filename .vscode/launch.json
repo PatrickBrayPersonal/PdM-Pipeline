@@ -5,7 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "silent",
+            "name": "class",
+            "type": "python",
+            "request": "launch",
+            "module": "pdm",
+            "args": ["--config", "label1_classification", "--silent", "True"],
+            "subProcess": true,
+            "justMyCode": true
+        },
+        {
+            "name": "regression",
             "type": "python",
             "request": "launch",
             "module": "pdm",
