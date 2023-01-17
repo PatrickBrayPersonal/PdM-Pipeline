@@ -1,3 +1,4 @@
   label: "RUL"
+  all_labels: "id, RUL, label1, label2"
   evaluate: "regression"
   model: "LinearRegression"
