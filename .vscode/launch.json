@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "module": "pdm",
-            "args": ["--config", "test_config", "--silent", "True"],
+            "args": ["--config", "test_config"],
             "subProcess": true,
             "justMyCode": true
         },
@@ -18,7 +18,7 @@
             "type": "python",
             "request": "launch",
             "module": "pdm",
-            "args": ["--config", "label1_classification", "--silent", "True"],
+            "args": ["--config", "label1_classification"],
             "subProcess": true,
             "justMyCode": true
         },
@@ -27,7 +27,7 @@
             "type": "python",
             "request": "launch",
             "module": "pdm",
-            "args": ["--config", "rul_regression", "--silent", "True"],
+            "args": ["--config", "rul_regression"],
             "subProcess": true,
             "justMyCode": true
         },

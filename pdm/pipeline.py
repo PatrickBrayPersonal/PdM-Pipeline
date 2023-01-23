@@ -40,6 +40,9 @@ def clean_dataset(config: TrainConfig, df: pd.DataFrame) -> pd.DataFrame:
             df = getattr(cleaning, cleaning_func["name"])(df, **cleaning_func["args"])
         else:
             df = getattr(cleaning, cleaning_func["name"])(df)
+        assert isinstance(
+            df, pd.DataFrame
+        ), f"{cleaning_func['name']} returns a non dataframe, {type(df)}"
     return df
 
 
@@ -47,6 +50,9 @@ def make_model(config: TrainConfig) -> BaseEstimator:
     model_list = []
     for model_info in config.model:
         model = getattr(models, model_info["name"])
+        assert "fit" in dir(
+            model
+        ), f"{model_info['name']} returned value missing 'fit' predictor"
         if "args" in model_info:
             model = (model_info["name"], model(**model_info["args"]))
         else:

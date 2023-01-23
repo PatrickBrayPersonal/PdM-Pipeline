@@ -28,6 +28,12 @@ def classification(
 ) -> ClassificationMetrics:
     X, y = split_xy(config, test_df)
     y_hat = model.predict(X)
+    assert (
+        y_hat.min() >= 0 and y_hat.max() <= 1
+    ), f"Improper classification result: ranges {y_hat.min()} to {y_hat.max()}"
+    assert (
+        y.min() >= 0 and y.max() <= 1
+    ), f"Improper classification label: ranges {y.min()} to {y.max()}"
     results = {}
     for metric in dataclasses.fields(ClassificationMetrics):
         results[metric.name] = getattr(skmetrics, metric.name)(y, y_hat)
