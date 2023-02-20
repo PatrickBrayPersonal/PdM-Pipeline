@@ -1,0 +1,21 @@
+{
+  "todo": [],
+  "in-progress": [
+    {
+      "assignedTo": {
+        "name": "Patrick Bray"
+      },
+      "creation_time": "2023-02-20T18:30:31.280Z",
+      "description": {
+        "content": "https://www.mlflow.org/docs/latest/recipes.html#recipe-templates",
+        "mime": "text/markdown"
+      },
+      "id": "1",
+      "prio": 2,
+      "references": [],
+      "title": "Convert to MLFlow recipes"
+    }
+  ],
+  "testing": [],
+  "done": []
+}
