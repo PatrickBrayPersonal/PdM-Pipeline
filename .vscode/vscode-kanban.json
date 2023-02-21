@@ -1,6 +1,8 @@
 {
   "todo": [],
-  "in-progress": [
+  "in-progress": [],
+  "testing": [],
+  "done": [
     {
       "assignedTo": {
         "name": "Patrick Bray"
@@ -15,7 +17,5 @@
       "references": [],
       "title": "Convert to MLFlow recipes"
     }
-  ],
-  "testing": [],
-  "done": []
+  ]
 }
