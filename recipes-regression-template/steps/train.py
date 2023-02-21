@@ -32,4 +32,4 @@ def linear_regression(estimator_params: Dict[str, Any] = {}):
     # FIXME::OPTIONAL: return a scikit-learn-compatible regression estimator with fine-tuned
     #                  hyperparameters.
 
-    return LinearRegression()
+    return LinearRegression(**estimator_params)
