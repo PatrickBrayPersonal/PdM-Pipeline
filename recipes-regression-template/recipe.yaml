@@ -43,15 +43,12 @@ steps:
     #  FIXME::OPTIONAL: Specifies the method that defines an sklearn-compatible transformer, which
     #                   applies input feature transformation during model training and inference.
     transformer_method: drop_columns
-    columns:
-      - label0
-      - label1
   train:
     #
     # FIXME::REQUIRED: Specifies the method to use for training. Options are "automl/flaml" for
     #                  AutoML training or "custom" for user-defined estimators.
-    using: "custom"
-    estimator_method: "linear_regression"
+    using: "automl/flaml"
+    # estimator_method: "linear_regression"
   evaluate:
     #
     # FIXME::OPTIONAL: Sets performance thresholds that a trained model must meet in order to be
